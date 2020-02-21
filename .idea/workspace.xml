@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="624213c3-2b90-4f9a-a0c9-b63ed3602c8d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WWqenjMFFQzY4UTVOKe5Jmpw4p" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/models" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="624213c3-2b90-4f9a-a0c9-b63ed3602c8d" name="Default Changelist" comment="" />
+      <created>1579275795875</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1579275795875</updated>
+      <workItem from="1579275798612" duration="5008000" />
+      <workItem from="1579538367877" duration="656000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="985" y="524" width="579" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579276682770">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state x="985" y="524" width="579" height="390" key="#com.intellij.fileTypes.FileTypeChooser/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579276682770" />
+    <state width="2514" height="406" key="GridCell.Tab.0.bottom" timestamp="1579513277943">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state width="2514" height="406" key="GridCell.Tab.0.bottom/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579513277943" />
+    <state width="2514" height="406" key="GridCell.Tab.0.center" timestamp="1579513277943">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state width="2514" height="406" key="GridCell.Tab.0.center/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579513277943" />
+    <state width="2514" height="406" key="GridCell.Tab.0.left" timestamp="1579513277942">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state width="2514" height="406" key="GridCell.Tab.0.left/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579513277942" />
+    <state width="2514" height="406" key="GridCell.Tab.0.right" timestamp="1579513277943">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state width="2514" height="406" key="GridCell.Tab.0.right/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579513277943" />
+    <state x="769" y="354" key="SettingsEditor" timestamp="1579539022225">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state x="769" y="354" key="SettingsEditor/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579539022225" />
+    <state x="943" y="327" width="672" height="678" key="search.everywhere.popup" timestamp="1579539029002">
+      <screen x="307" y="0" width="2253" height="1440" />
+    </state>
+    <state x="943" y="327" width="672" height="678" key="search.everywhere.popup/792.1440.1920.1080/307.0.2253.1440@307.0.2253.1440" timestamp="1579539029002" />
+  </component>
+</project>
