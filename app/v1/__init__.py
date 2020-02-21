@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, abort
 from app import app
 from flask_cors import CORS
 from multiprocessing import Pool
@@ -40,7 +40,10 @@ def specific_letter_get(letter_id):
 @v1.route('/letters/<int:letter_id>/status', methods=['PATCH'])
 def specific_letter_status_update(letter_id):
     letter = get_letter(letter_id)
-    res = laposte_client.get(letter.tracking_number)
+    try:
+        res = laposte_client.get(letter.tracking_number)
+    except:
+        abort(make_response(jsonify(message="An error occured in the Laposte API call"), 500))
     letter.status = get_letter_status(res.json())
     letter.update()
     return "Status of letter with id {} correctly updated".format(letter.id), 204
