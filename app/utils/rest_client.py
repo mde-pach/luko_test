@@ -6,6 +6,9 @@ class SimpleLaposteClient():
         self.headers = {}
 
     def get(self, resource):
-        res = requests.get("{base_url}/{resource}".format(base_url=base_url, resource=resource))
+        res = requests.get(
+            "{base_url}/{resource}".format(base_url=self.base_url, resource=resource),
+            headers=self.headers
+        )
         res.raise_for_status()
         return res
