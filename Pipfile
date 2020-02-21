@@ -10,6 +10,8 @@ flask = "*"
 flask-sqlalchemy = "*"
 flask-cors = "*"
 requests = "*"
+pytest = "*"
+requests-mock = "*"
 
 [requires]
 python_version = "3.5"
