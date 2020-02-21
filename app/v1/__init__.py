@@ -16,11 +16,20 @@ laposte_client.headers = {
 }
 
 
-def get_letter(letter_id, abort_if_not_found=True):
+def get_letter(letter_id):
     letter = Letter.query.get(letter_id)
-    if abort_if_not_found and letter is None:
+    if letter is None:
         abort(make_response(jsonify(message="Letter with id {} not found.".format(letter.id)), 404))
     return letter
+
+def get_letter_status_from_response(letter_response):
+    status = None
+    for timeline_event in letter_response.get('shipment', {}).get('timeline', {}):
+        if timeline_event.get('status', False):
+            status = timeline_event.get('shortLabel')
+        else:
+            break
+    return status
 
 @v1.route('/ping', methods=['GET'])
 def ep_ping():
@@ -44,10 +53,20 @@ def specific_letter_get(letter_id):
 def specific_letter_status_update(letter_id):
     letter = get_letter(letter_id)
     res = laposte_client.get(letter.tracking_number)
-    for timeline_event in res.json().get('shipment', {}).get('timeline', {}):
-        if timeline_event.get('status', False):
-            letter.status = timeline_event.get('shortLabel')
-        else:
-            break
+    letter.status = get_letter_status_from_response(res.json())
     letter.update()
     return "Status of letter with id {} correctly updated".format(letter.id), 204
+
+@v1.route('/letters/status', methods=['PATCH'])
+def letters_status_update():
+    letters = Letter.query.all()
+    for letter in letters:
+        try:
+            res = laposte_client.get(letter.tracking_number)
+        except:
+            continue
+        letter.status = get_letter_status_from_response(res.json())
+        letter.update()
+
+    return "All letter status are updated", 204
+
