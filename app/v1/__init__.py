@@ -1,9 +1,12 @@
 from flask import Blueprint, request, jsonify, make_response
 from app import app
 from flask_cors import CORS
+from multiprocessing import Pool
 
 from app.models.letter import Letter
 from app.utils.rest_client import SimpleLaposteClient
+from app.utils.database_tools import get_letter
+from app.utils.response_parser import get_letter_status
 
 
 v1 = Blueprint("v1", __name__)
@@ -15,21 +18,6 @@ laposte_client.headers = {
     'Accept': 'application/json'
 }
 
-
-def get_letter(letter_id):
-    letter = Letter.query.get(letter_id)
-    if letter is None:
-        abort(make_response(jsonify(message="Letter with id {} not found.".format(letter.id)), 404))
-    return letter
-
-def get_letter_status_from_response(letter_response):
-    status = None
-    for timeline_event in letter_response.get('shipment', {}).get('timeline', {}):
-        if timeline_event.get('status', False):
-            status = timeline_event.get('shortLabel')
-        else:
-            break
-    return status
 
 @v1.route('/ping', methods=['GET'])
 def ep_ping():
@@ -53,20 +41,23 @@ def specific_letter_get(letter_id):
 def specific_letter_status_update(letter_id):
     letter = get_letter(letter_id)
     res = laposte_client.get(letter.tracking_number)
-    letter.status = get_letter_status_from_response(res.json())
+    letter.status = get_letter_status(res.json())
     letter.update()
     return "Status of letter with id {} correctly updated".format(letter.id), 204
 
-@v1.route('/letters/status', methods=['PATCH'])
-def letters_status_update():
+def asynchronous_letters_status_update():    
     letters = Letter.query.all()
     for letter in letters:
         try:
             res = laposte_client.get(letter.tracking_number)
         except:
             continue
-        letter.status = get_letter_status_from_response(res.json())
+        letter.status = get_letter_status(res.json())
         letter.update()
 
+@v1.route('/letters/status', methods=['PATCH'])
+def letters_status_update():
+    pool = Pool(processes=1)
+    pool.apply_async(asynchronous_letters_status_update, ())
     return "All letter status are updated", 204
 
