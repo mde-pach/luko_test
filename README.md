@@ -6,7 +6,11 @@
 #### Run
  * `pipenv shell` to enter virtual environment (loading the variables in .env)
  * `env LAPOSTE_API_KEY=your_api_key flask run`
- 
+#### TEst
+ * `pipenv shell` to enter virtual environment (loading the variables in .env)
+ * `python -m pytest tests`
+
+
 #### Explore DB
 Database is running on SQLite, it can be browsed using "DB Browser for SQLite" for instance
 
