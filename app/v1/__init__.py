@@ -29,13 +29,21 @@ def letters():
         return make_response(jsonify([letter.serialize() for letter in Letter.query.all()]), 200)
     elif request.method == 'POST':
         letter = Letter()
+        tracking_number = request.json.get('tracking_number', '')
+        if tracking_number == '':
+            abort(make_response(jsonify(message="Incorrect or missing \"tracking_number\" data in body"), 400))
+        letter.tracking_number = tracking_number
         letter.add()
         return "All done : letter object {} has been created".format(letter.id), 200
 
-@v1.route('/letters/<int:letter_id>', methods=['GET'])
+@v1.route('/letters/<int:letter_id>', methods=['GET', 'DELETE'])
 def specific_letter_get(letter_id):
     letter = get_letter(letter_id)
-    return make_response(jsonify(letter.serialize()), 200)
+    if request.method == 'GET':
+        return make_response(jsonify(letter.serialize()), 200)
+    elif request.method == 'DELETE':
+        letter.delete()
+        return 'Letter with id {} deleted'.format(letter.id), 200
 
 @v1.route('/letters/<int:letter_id>/status', methods=['PATCH'])
 def specific_letter_status_update(letter_id):
@@ -48,7 +56,7 @@ def specific_letter_status_update(letter_id):
     letter.update()
     return "Status of letter with id {} correctly updated".format(letter.id), 204
 
-def asynchronous_letters_status_update():    
+def update_letters_status():    
     letters = Letter.query.all()
     for letter in letters:
         try:
@@ -60,7 +68,10 @@ def asynchronous_letters_status_update():
 
 @v1.route('/letters/status', methods=['PATCH'])
 def letters_status_update():
-    pool = Pool(processes=1)
-    pool.apply_async(asynchronous_letters_status_update, ())
-    return "All letter status are updated", 204
+    if request.args.get('async'):
+        pool = Pool(processes=1)
+        pool.apply_async(update_letters_status, ())
+        return "All letter will be updated", 204
+    update_letters_status()
+    return "All letter status are updated", 200
 

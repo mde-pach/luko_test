@@ -5,7 +5,7 @@
  * `pipenv install` to install project's requirements
 #### Run
  * `pipenv shell` to enter virtual environment (loading the variables in .env)
- * `flask run`
+ * `env LAPOSTE_API_KEY=your_api_key flask run`
  
 #### Explore DB
 Database is running on SQLite, it can be browsed using "DB Browser for SQLite" for instance
